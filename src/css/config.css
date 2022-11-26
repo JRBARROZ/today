@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 
+ul {
+  list-style-type: none;
+}
+
 /* FONTS */
 
 @font-face {
@@ -39,6 +43,16 @@
   --text-sm: 0.75rem; /* 12px */
   --text-md: 1rem; /* 16px */
   --text-lg: 3.5rem; /* 56px */
+
+  --round-sm: 10px;
+}
+
+span {
+  font-weight: 200;
+}
+
+.title {
+  margin-bottom: var(--sp-md);
 }
 
 body {

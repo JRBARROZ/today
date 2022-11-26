@@ -1,2 +1,68 @@
 @import url(./config.css);
 
+.container {
+  width: 100%;
+  max-width: 1060px;
+  margin: 70px auto;
+}
+
+header h1 {
+  font-size: var(--text-lg);
+}
+
+header h1 span {
+  font-weight: 200;
+}
+
+header p {
+  color: var(--op-60);
+}
+
+main {
+  display: grid;
+  margin-top: var(--sp-lg);
+  gap: var(--sp-md);
+  grid-template-columns: 2fr 1fr;
+}
+
+main section {
+  padding: var(--sp-md);
+  border-radius: var(--round-sm);
+  background-color: var(--op-05);
+}
+
+.new-todo-container {
+  grid-column: 2;
+}
+
+.todo-container {
+  grid-row: span 2;
+}
+
+.todo-container ul {
+}
+
+.todo-container ul li {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: var(--sp-xs) var(--sp-md);
+  background-color: var(--op-05);
+  border-radius: var(--round-sm);
+}
+
+.todo-container ul li p {
+  color: var(--op-60);
+}
+
+.delete-button {
+  top: -5px;
+  right: -5px;
+  position: absolute;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.delete-button:hover {
+  transform: scale(110%);
+}
