@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  outline: none;
 }
 
 ul {
@@ -35,6 +36,7 @@ ul {
   --op-05: rgba(255, 255, 255, 0.05);
   --op-60: rgba(255, 255, 255, 0.6);
 
+  --sp-xxs: 5px;
   --sp-xs: 10px;
   --sp-sm: 16px;
   --sp-md: 20px;
