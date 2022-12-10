@@ -15,7 +15,7 @@
 - Grid & Flexbox
 - Animações & Keyframes
 - DOM Manipulação
-
+- LocalStorage Manipulação
 <img width="992" alt="amazing" src="https://user-images.githubusercontent.com/40250320/203187955-74c84873-00be-43fd-8c1e-0f2755d3ca15.png">
 
 
