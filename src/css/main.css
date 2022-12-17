@@ -43,6 +43,14 @@ main section {
 }
 
 .todo-container ul {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-sm);
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 500px;
+  padding-top: var(--sp-sm);
+  padding-right: var(--sp-sm);
 }
 
 .todo-container ul li {
@@ -53,7 +61,7 @@ main section {
   padding: var(--sp-xs) var(--sp-md);
   background-color: var(--op-05);
   border-radius: var(--round-sm);
-  animation: show .3s forwards;
+  animation: show 0.3s forwards;
 }
 
 .todo-container ul li p {
@@ -129,5 +137,22 @@ main section {
   to {
     opacity: 1;
     transform: translateX(0px);
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .todo-container {
+    grid-column: span 2;
+  }
+}
+@media screen and (max-width: 500px) {
+  .container {
+    padding: var(--sp-sm);
+  }
+  .new-todo-container {
+    grid-column: span 2;
+  }
+  .todo-finished {
+    grid-column: span 2;
   }
 }
