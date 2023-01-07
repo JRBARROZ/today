@@ -1,22 +1,12 @@
 import { createElement, storage } from "./utils.js";
 const todoForm = document.getElementById("todo-form");
 const todoListContainer = document.querySelector(".todo-container ul");
-const todos = [];
+const chuckNorrisPhrase = document.querySelector("#chuck-phrase");
 
-todoForm.addEventListener("submit", (event) => {
-  event.preventDefault();
-  // const  taskName = event.target.elements[0]
-  // const  taskDescription = event.target.elements[1]
-  const [taskName, taskDescription] = event.target.elements;
+let todos = storage.get("todoList") || "[]";
+todos = JSON.parse(todos);
 
-  const todo = {
-    id: todos.length,
-    name: taskName.value,
-    description: taskDescription.value,
-    createdAt: new Date().toLocaleString(),
-  };
-
-  todos.push(todo);
+function createTodo(todo) {
   const taskTitle = createElement("h4", null, todo.name);
   const taskDescriptionParagraphy = createElement("p", null, todo.description);
   const taskDate = createElement("p", null, todo.createdAt);
@@ -40,16 +30,60 @@ todoForm.addEventListener("submit", (event) => {
   path.setAttribute("fill", "#FFA5A5");
   svg.appendChild(path);
 
-  svg.addEventListener("click", function () {
+  svg.addEventListener("click", function (event) {
     if (confirm(`Você deseja realmente deletar: ${todo.name}`)) {
-      console.log("Deletou!");
-    } else {
-      console.log("Permanece.");
+      const listItemToRemove = event.currentTarget.parentElement;
+      listItemToRemove.classList.add("hide");
+
+      const filteredTodos = todos.filter((storageTodo) => {
+        if (storageTodo.id !== todo.id) {
+          return storageTodo;
+        }
+      });
+
+      storage.set("todoList", JSON.stringify(filteredTodos));
+
+      setTimeout(function () {
+        listItemToRemove.remove();
+      }, 300);
     }
   });
 
   const listItem = createElement("li", null, [taskInfo, taskDate, svg]);
 
-  todoListContainer.appendChild(listItem);
+  return listItem;
+}
+
+todoForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  // const  taskName = event.target.elements[0]
+  // const  taskDescription = event.target.elements[1]
+  const [taskName, taskDescription] = event.target.elements;
+
+  const todo = {
+    id: todos.length,
+    name: taskName.value,
+    description: taskDescription.value,
+    createdAt: new Date().toLocaleString(),
+  };
+
+  todos.push(todo);
+  todoListContainer.appendChild(createTodo(todo));
+
   storage.set("todoList", JSON.stringify(todos));
 });
+
+todos.forEach((todo) => {
+  todoListContainer.appendChild(createTodo(todo));
+});
+
+
+setInterval(() => {
+  fetch("https://api.chucknorris.io/jokes/random")
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      chuckNorrisPhrase.innerText = data.value;
+    });
+}, 1000 * 10);
